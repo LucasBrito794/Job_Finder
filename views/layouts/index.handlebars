@@ -1,0 +1,41 @@
+<div class="container-fluid" id="top-container">
+        <h1 class="text-center" id="main-title">Encontre o emprego dos seus sonhos</h1>
+        <p class="text-center" id="main-subtitle">Somos o site com mais vagas de tecnologia do mercado, direcionadas a home office</p>
+        <form action="/" class="form-inline" id="search-form" method="GET">
+            <div class="form-group col-md-10">
+                <input type="text" class="form-control" id="job" name="job" placeholder="Digite a vaga que está buscando"> 
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary">Procurar</button>
+            </div>
+        </form>
+    </div>
+    <main>
+        <div id="jobs-container" class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    {{#if search}}
+                        <h2 id="job-list-title">Buscando cargos que contêm: {{search}}</h2>
+                    {{else}}
+                        <h2 id="job-list-title">Veja as nossas vagas em destaque:</h2>
+                    {{/if}}
+                    <div class="alert alert-info hidden" role="alert">
+                        Conteiners em amarelo alertam que a vaga é nova!
+                    </div>
+
+                    <ul id="job-list" class="list-group">
+                        {{#each jobs}}
+                        <li class="list-group-item {{#if dataValues.new_job}} new-job {{/if}}">
+                            <img src="/img/company.svg" alt="Company">   
+                            <p>{{dataValues.company}}</p>
+                            <h2>{{dataValues.title}}</h2>
+                            <p>R$ {{dataValues.salary}}</p>
+                            <span class="new-job-label">Nova</span>
+                            <a href="/jobs/view/{{dataValues.id}}" class="btn btn-primary">Ver vaga</a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
